@@ -1,0 +1,10 @@
+{
+  "name": "microCMStoMongoDB",
+  "version": "1.0.0",
+  "description": "Organize information and upload to mongoDB",
+  "main": "app.js",
+  "repository": "git@github.com:blackraccoon000/microCMStoMongoDB.git",
+  "author": "Yutaka Fujii <yutakaf@playwell.site>",
+  "license": "\"BSD-3-Clause\"",
+  "private": null
+}
