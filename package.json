@@ -5,6 +5,21 @@
   "main": "app.js",
   "repository": "git@github.com:blackraccoon000/microCMStoMongoDB.git",
   "author": "Yutaka Fujii <yutakaf@playwell.site>",
-  "license": "\"BSD-3-Clause\"",
-  "private": null
+  "license": "BSD-3-Clause",
+  "private": null,
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "node": "node",
+    "nodemon": "nodemon"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "mongoose": "^5.12.10",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.8"
+  }
 }

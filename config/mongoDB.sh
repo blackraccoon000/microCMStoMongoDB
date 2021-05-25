@@ -1,0 +1,1 @@
+/Users/yutakaf/mongodb/bin/mongod --dbpath=/Users/yutakaf/mongodb-data
