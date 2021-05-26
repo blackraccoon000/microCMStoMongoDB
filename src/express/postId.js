@@ -1,15 +1,10 @@
 module.exports = (app, models, queries) => {
-  return app.post(queries, (req, res) => {
-    const model = new models(req.body);
-    model
-      .save()
-      .then((value) => {
-        console.log('collect:', value);
-        res.status(201).send('collect' + model);
-      })
-      .catch((error) => {
-        console.log('error:', error);
-        res.status(400).send('error' + error);
-      });
+  return app.post(queries, async (req, res) => {
+    const value = await new models(req.body).save();
+    try {
+      res.status(201).send('collect' + value);
+    } catch (error) {
+      res.status(400).send('error' + error);
+    }
   });
 };
