@@ -18,15 +18,6 @@ const keywordSchema = new mongoose.Schema({
   },
 });
 
-/** Middle ware Before Save Use */
-keywordSchema.pre('save', async function (next) {
-  // this is req.body
-  const keyword = this;
-  console.log(keyword);
-  console.log('just before saving');
-  next();
-});
-
 const KeywordsList = mongoose.model('KeywordList', keywordSchema);
 
 module.exports = KeywordsList;
