@@ -5,6 +5,7 @@ const combineRouter = require('./routers/combineRouter');
 const userRouter = require('./routers/userRouter');
 const app = express();
 const port = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(combineRouter);
 app.use(userRouter);
