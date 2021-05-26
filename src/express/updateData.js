@@ -4,6 +4,7 @@ module.exports = (app, models, queries) => {
     const update = req.body;
     const value = await models.findByIdAndUpdate(_id, update);
     try {
+      !value && res.status(400).send('not found');
       res.status(201).send('collect' + value);
     } catch (error) {
       res.status(400).send('error Invalid Update!:' + error);
