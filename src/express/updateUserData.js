@@ -24,11 +24,3 @@ module.exports = (app, models, queries) => {
     }
   });
 };
-
-// existUser: {
-//   name: 'yutaka',
-//   email: 'anonymous',
-//   age: 34,
-//   _id: 60adf91eb092e829e9d68257,
-//   __v: 0
-// }
