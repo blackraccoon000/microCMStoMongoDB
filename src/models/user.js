@@ -54,10 +54,22 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+// 取得してきたデータを公開しても良い状態に可変させる。
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
+};
+
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
+  console.log('gen:', user);
   const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse');
-
+  console.log('gen:', token);
   user.tokens = user.tokens.concat({ token });
   await user.save();
 
@@ -68,11 +80,11 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
-    throw new Error('Unable to login');
+    throw new Error('入力されたEmail情報は登録がありません');
   }
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new Error('Unable to login');
+    throw new Error('入力されたPasswordが間違っています');
   }
   return user;
 };
