@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/user');
+const Users = require('../models/user');
 const common = require('../express/common');
 const createUser = require('../express/createUser');
 const updateUser = require('../express/updateUser');
@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 const router = new express.Router();
 
 /** ユーザーを作成する 認証：不要 */
-createUser(router, User, '/user');
+createUser(router, Users, '/user');
 
 /** ユーザーを削除する 認証：必要 */
 deleteUser(router, '/user');
@@ -20,7 +20,7 @@ updateUser(router, '/user/me');
 /** email & password でサインインする */
 router.post('/user/signIn', async (req, res) => {
   try {
-    const user = await User.findByCredentials(
+    const user = await Users.findByCredentials(
       req.body.email,
       req.body.password
     );

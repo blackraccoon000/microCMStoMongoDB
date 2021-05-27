@@ -16,8 +16,13 @@ const keywordSchema = new mongoose.Schema({
     type: [objSchema],
     require: true,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: true,
+    ref: 'Users',
+  },
 });
 
-const KeywordsList = mongoose.model('KeywordList', keywordSchema);
+const KeywordLists = mongoose.model('keywordLists', keywordSchema);
 
-module.exports = KeywordsList;
+module.exports = KeywordLists;
