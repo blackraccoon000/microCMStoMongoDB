@@ -1,5 +1,5 @@
 const express = require('express');
-const KeywordList = require('../models/keywordList');
+const KeywordLists = require('../models/keywordLists');
 const TotalInformation = require('../models/totalInformation');
 const common = require('../express/common');
 
