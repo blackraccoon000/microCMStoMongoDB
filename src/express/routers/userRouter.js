@@ -1,9 +1,9 @@
 const express = require('express');
-const Users = require('../models/users');
-const createUser = require('../express/createUser');
-const updateUser = require('../express/updateUser');
-const deleteUser = require('../express/deleteUser');
-const auth = require('../middleware/auth');
+const Users = require('../../models/users');
+const createUser = require('../routes/createUser');
+const updateUser = require('../routes/updateUser');
+const deleteUser = require('../routes/deleteUser');
+const auth = require('../../middleware/auth');
 
 const router = new express.Router();
 
