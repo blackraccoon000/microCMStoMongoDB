@@ -1,6 +1,5 @@
 const express = require('express');
-const Users = require('../models/user');
-const common = require('../express/common');
+const Users = require('../models/users');
 const createUser = require('../express/createUser');
 const updateUser = require('../express/updateUser');
 const deleteUser = require('../express/deleteUser');

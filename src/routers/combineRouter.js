@@ -1,10 +1,10 @@
 const express = require('express');
 const KeywordLists = require('../models/keywordLists');
-const TotalInformation = require('../models/totalInformation');
+const TotalInformations = require('../models/totalInformations');
 const common = require('../express/common');
 
 const router = new express.Router();
-common(router, KeywordList, '/keywordList');
-common(router, TotalInformation, '/totalInformation');
+common(router, KeywordLists, '/keywordList');
+common(router, TotalInformations, '/totalInformation');
 
 module.exports = router;

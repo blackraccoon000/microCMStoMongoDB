@@ -26,11 +26,21 @@ const objSchema = new mongoose.Schema({
   },
 });
 
-const TotalInformation = mongoose.model('TotalInformation', {
+const totalInformationSchema = new mongoose.Schema({
   totalInformation: {
     type: objSchema,
     require: true,
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    require: true,
+    ref: 'Users',
+  },
 });
+
+const TotalInformation = mongoose.model(
+  'totalInformations',
+  totalInformationSchema
+);
 
 module.exports = TotalInformation;
