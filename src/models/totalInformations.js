@@ -43,4 +43,4 @@ const TotalInformation = mongoose.model(
   totalInformationSchema
 );
 
-module.exports = TotalInformation;
+module.exports = TotalInformations;
