@@ -14,7 +14,7 @@ app.listen(port, () => {
   console.log('Server is up on port:', port);
 });
 
-const Key = require('./models/keywordList');
+const Key = require('./models/keywordLists');
 const Users = require('./models/user');
 
 const main = async () => {
