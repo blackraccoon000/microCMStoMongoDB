@@ -54,6 +54,12 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
+userSchema.virtual('keywordLists', {
+  ref: 'keywordLists',
+  localField: '_id',
+  foreignField: 'owner',
+});
+
 // 取得してきたデータを公開しても良い状態に可変させる。
 userSchema.methods.toJSON = function () {
   const user = this;
@@ -78,7 +84,7 @@ userSchema.methods.generateAuthToken = async function () {
 
 /** userSchemaにメソッドを追加 */
 userSchema.statics.findByCredentials = async (email, password) => {
-  const user = await User.findOne({ email });
+  const user = await Users.findOne({ email });
   if (!user) {
     throw new Error('入力されたEmail情報は登録がありません');
   }
@@ -98,5 +104,5 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Users = mongoose.model('Users', userSchema);
+module.exports = Users;
