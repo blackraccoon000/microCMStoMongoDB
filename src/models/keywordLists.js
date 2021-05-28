@@ -11,17 +11,22 @@ const objSchema = new mongoose.Schema({
   },
 });
 
-const keywordSchema = new mongoose.Schema({
-  keywordList: {
-    type: [objSchema],
-    require: true,
+const keywordSchema = new mongoose.Schema(
+  {
+    keywordList: {
+      type: [objSchema],
+      require: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      require: true,
+      ref: 'Users',
+    },
   },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    require: true,
-    ref: 'Users',
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const KeywordLists = mongoose.model('keywordLists', keywordSchema);
 

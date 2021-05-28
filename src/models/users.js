@@ -2,57 +2,63 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const KeywordLists = require('./keywordLists');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    default: 'anonymous',
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    default: 'anonymous',
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error('Email is invalid');
-      }
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+      default: 'anonymous',
     },
-  },
-  age: {
-    type: Number,
-    default: 0,
-    validate(value) {
-      if (value < 0) {
-        throw new Error('Age must be a positive number');
-      }
-    },
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 5,
-    validate(value) {
-      if (value.toLowerCase().includes('password')) {
-        throw new Error('Password can not contain "Password"');
-      }
-    },
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      default: 'anonymous',
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Email is invalid');
+        }
       },
     },
-  ],
-});
+    age: {
+      type: Number,
+      default: 0,
+      validate(value) {
+        if (value < 0) {
+          throw new Error('Age must be a positive number');
+        }
+      },
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: 5,
+      validate(value) {
+        if (value.toLowerCase().includes('password')) {
+          throw new Error('Password can not contain "Password"');
+        }
+      },
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.virtual('keywordLists', {
   ref: 'keywordLists',
@@ -102,6 +108,13 @@ userSchema.pre('save', async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next();
+});
+
+/** Middleware Before Remove Use */
+userSchema.pre('remove', async function (next) {
+  const user = this;
+  await KeywordLists.deleteMany({ owner: user._id });
+  return next();
 });
 
 const Users = mongoose.model('Users', userSchema);
