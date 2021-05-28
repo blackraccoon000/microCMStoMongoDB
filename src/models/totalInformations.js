@@ -38,7 +38,7 @@ const totalInformationSchema = new mongoose.Schema({
   },
 });
 
-const TotalInformation = mongoose.model(
+const TotalInformations = mongoose.model(
   'totalInformations',
   totalInformationSchema
 );
