@@ -1,4 +1,4 @@
-const auth = require('../middleware/auth');
+const auth = require('../../middleware/auth');
 
 module.exports = (app, models, queries) => {
   return app.patch(queries, auth, async (req, res) => {

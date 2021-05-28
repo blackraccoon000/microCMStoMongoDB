@@ -1,10 +1,10 @@
-const auth = require('../middleware/auth');
+const auth = require('../../middleware/auth');
 
 module.exports = (app, models, queries) => {
   return app.get(queries, auth, async (req, res) => {
-    const value = await models.find({ owner: req.user._id });
+    const user = await models.find({});
     try {
-      res.status(201).send('collect:' + value);
+      res.status(201).send({ user: user.getPublicProfile() });
     } catch (error) {
       res.status(500).send('error:' + error);
     }
