@@ -51,7 +51,6 @@ router.patch('/acq/update/:id', auth, async (req, res) => {
     }
 
     const updateFirstKeys = Object.keys(updateData);
-    // console.log(updateFirstKeys);
 
     /** 該当オブジェクトを更新する */
     updateFirstKeys.map((update) => {
