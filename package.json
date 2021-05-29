@@ -10,7 +10,8 @@
   "scripts": {
     "db:start": "sh config/mongoDB.sh",
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "dev": "nodemon src/app.js --env development",
+    "prod": "nodemon src/app.js",
     "node": "node",
     "nodemon": "nodemon"
   },

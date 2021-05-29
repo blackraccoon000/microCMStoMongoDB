@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const KeywordLists = require('./keywordLists');
+const Acquisitions = require('./acquisitions');
 
 const userSchema = new mongoose.Schema(
   {
@@ -60,8 +60,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.virtual('keywordLists', {
-  ref: 'keywordLists',
+userSchema.virtual('acquisitions', {
+  ref: 'acquisitions',
   localField: '_id',
   foreignField: 'owner',
 });
@@ -80,7 +80,7 @@ userSchema.methods.toJSON = function () {
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   console.log('gen:', user);
-  const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse');
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.VERIFY);
   console.log('gen:', token);
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -113,7 +113,7 @@ userSchema.pre('save', async function (next) {
 /** Middleware Before Remove Use */
 userSchema.pre('remove', async function (next) {
   const user = this;
-  await KeywordLists.deleteMany({ owner: user._id });
+  await Acquisitions.deleteMany({ owner: user._id });
   return next();
 });
 
