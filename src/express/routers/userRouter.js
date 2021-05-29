@@ -1,20 +1,12 @@
 const express = require('express');
 const Users = require('../../models/users');
 const createUser = require('../routes/createUser');
-const updateUser = require('../routes/updateUser');
-const deleteUser = require('../routes/deleteUser');
 const auth = require('../../middleware/auth');
 
 const router = new express.Router();
 
 /** ユーザーを作成する 認証：不要 */
-createUser(router, Users, '/user');
-
-/** ユーザーを削除する 認証：必要 */
-deleteUser(router, '/user');
-
-/** ユーザー情報を変更する 認証：必要 */
-updateUser(router, '/user/me');
+createUser(router, '/user');
 
 /** email & password でサインインする */
 router.post('/user/signIn', async (req, res) => {
@@ -53,11 +45,6 @@ router.post('/user/signOutAll', auth, async (req, res) => {
   } catch (error) {
     return res.status(500).send();
   }
-});
-
-/** token情報に則り、user情報を取得する */
-router.get('/user/me', auth, async (req, res) => {
-  return res.send(req.user);
 });
 
 module.exports = router;
