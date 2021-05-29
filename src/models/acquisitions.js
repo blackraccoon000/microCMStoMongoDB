@@ -51,6 +51,25 @@ const acquisitionsSchema = new mongoose.Schema(
   }
 );
 
+acquisitionsSchema.methods.toJSON = function () {
+  const acq = this;
+  const acqObject = acq.toObject();
+
+  /** 大本の_id削除 */
+  delete acqObject._id;
+  delete acqObject.owner;
+  delete acqObject.createdAt;
+  delete acqObject.updatedAt;
+
+  /** simpleArticlesの_id削除 */
+  acqObject.simpleArticles.map((article) => delete article._id);
+
+  /** keywordRelationalの_id削除 */
+  acqObject.keywordRelational.map((keyword) => delete keyword._id);
+
+  return acqObject;
+};
+
 const Acquisitions = mongoose.model('acquisitions', acquisitionsSchema);
 
 module.exports = Acquisitions;
