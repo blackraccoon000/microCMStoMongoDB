@@ -10,10 +10,10 @@ const totalCountFn = async () => {
   }
 };
 
-/** Get id/title/keyword */
+/** Get id/title/keyword/thumbnail/createdAt/updatedAt */
 const simpleArticlesFn = async (totalCount) => {
   const data = await baseAxios(
-    `?fields=id,title,keyword&offset=0&limit=${totalCount}`
+    `?fields=id,title,keyword,thumbnail,createdAt,updatedAt,&offset=0&limit=${totalCount}`
   );
   return data.contents;
 };

@@ -13,6 +13,18 @@ const simpleArticlesSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  thumbnail: {
+    type: Object,
+    require: true,
+  },
+  createdAt: {
+    type: String,
+    require: true,
+  },
+  updatedAt: {
+    type: String,
+    require: true,
+  },
 });
 
 const keywordRelationalSchema = new mongoose.Schema({
