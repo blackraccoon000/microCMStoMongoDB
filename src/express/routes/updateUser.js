@@ -24,7 +24,6 @@ module.exports = (app, queries) => {
         req.user[update] = req.body[update];
         return before;
       });
-      console.log(afterUpdates);
       await req.user.save();
       res.status(201).send('collect' + JSON.stringify(afterUpdates));
     } catch (error) {
