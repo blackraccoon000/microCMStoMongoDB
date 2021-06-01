@@ -13,6 +13,10 @@ const simpleArticlesSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  body: {
+    type: String,
+    require: true,
+  },
   thumbnail: {
     type: Object,
     require: true,
